@@ -35,7 +35,3 @@ To contribute to the repository:
 ## Communication
 
 For any questions, suggestions, or issues related to this repository, please contact the **Development Team Lead** or use the Issues section to report bugs or propose enhancements.
-
----
-
-### Let's collaborate, innovate, and build great things together!
