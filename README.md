@@ -21,7 +21,7 @@ The repository is organized to facilitate easy navigation and maintain clarity:
 
 ### Contributing
 To contribute to the repository:
-1. Clone the repository using `git clone <repository-url>`.
+1. Clone the repository using `git clone https://github.com/madebygarzon/pip-dev.git`.
 2. Create a new branch for your feature or bug fix: `git checkout -b feature/your-feature-name`.
 3. Commit your changes with descriptive messages: `git commit -m "Description of your change"`.
 4. Push your branch: `git push origin feature/your-feature-name`.
@@ -31,7 +31,3 @@ To contribute to the repository:
 - Follow the repository's folder structure and naming conventions.
 - Always document your code and updates in the respective `README.md` and `CHANGELOG.md`.
 - Ensure your code is thoroughly tested before pushing changes.
-
-## Communication
-
-For any questions, suggestions, or issues related to this repository, please contact the **Development Team Lead** or use the Issues section to report bugs or propose enhancements.
