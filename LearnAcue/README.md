@@ -17,7 +17,7 @@
 The website incorporates several custom scripts to enrich the user experience. Below is a general overview of the implemented scripts:
 
 1. **Report Extended**:
-   This PHP script [Report Extended](https://github.com/madebygarzon/pip-dev/blob/main/GradePotential/ReportExtended.php) integrates into the WordPress WooCommerce admin panel to provide an extended report page for orders. The primary focus is to allow administrators to view, filter, and download detailed sales data based on specific date ranges. Below is a summary of its functionality:
+   This PHP script [Report Extended](https://github.com/madebygarzon/pip-dev/blob/main/LearnAcue/ReportExtended.php) integrates into the WordPress WooCommerce admin panel to provide an extended report page for orders. The primary focus is to allow administrators to view, filter, and download detailed sales data based on specific date ranges. Below is a summary of its functionality:
    [Ubication](https://learn.acue.org/wp-admin/admin.php?page=edit-snippet&id=33)  
    
 
