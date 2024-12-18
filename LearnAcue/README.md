@@ -4,7 +4,7 @@
 
 ## Project Description
 
-....
+... Description ...
 
 ## Key Features
 
