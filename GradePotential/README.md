@@ -49,36 +49,34 @@ The website incorporates several custom scripts to enrich the user experience. B
     - Implements a 5-second timeout for the API response to prevent blocking the execution flow in case of delays.
 
 2. **Modal Looking For Local Tutor**:
-    ## Script Description: Dynamic Modal for Tutoring Service
-
-    This script [Modal Looking For Local Tutor](https://github.com/madebygarzon/pip-dev/blob/main/GradePotential/DynamicReplacement.js) dynamically creates and displays a modal window on a webpage to promote a tutoring service. The modal is designed to appear after a 5-second delay and includes responsive and interactive features to enhance user engagement. Below is an overview of its functionality:
+    This script [Modal Looking For Local Tutor](https://github.com/madebygarzon/pip-dev/blob/main/GradePotential/ModalLookingForLocalTutor.js) dynamically creates and displays a modal window on a webpage to promote a tutoring service. The modal is designed to appear after a 5-second delay and includes responsive and interactive features to enhance user engagement. Below is an overview of its functionality:
 
     ### Key Features
 
-    1. **Dynamic Creation**:
+    2.1. **Dynamic Creation**:
     - The modal is dynamically built using JavaScript.
     - Styles and HTML content are injected directly into the document at runtime.
 
-    2. **Modal Design and Content**:
+    2.2. **Modal Design and Content**:
     - **Image Section**: Displays an image representing tutoring or education.
     - **Text Section**: Includes a title ("We'll send a great tutor to your house!") and a description encouraging the user to call.
     - **Call-to-Action Button**: Features a button with a dynamically updated phone number or a placeholder ("Loading...") if the data is not available.
 
-    3. **Responsive Styling**:
+    2.3. **Responsive Styling**:
     - Utilizes media queries to adjust dimensions, font sizes, and layout for different screen sizes.
     - Ensures optimal display on both mobile and desktop devices.
 
-    4. **User Interaction**:
+    2.4. **User Interaction**:
     - A **close button** (`&times;`) allows users to dismiss the modal.
     - A visually distinct `call-button` encourages user engagement and includes hover effects for interactivity.
 
-    5. **Delayed Display**:
+    2.5. **Delayed Display**:
     - The modal is initially hidden and becomes visible 5 seconds after the page loads, triggered by toggling the `.show` class on the modal's backdrop.
 
-    6. **Reusability**:
+    2.6. **Reusability**:
     - The script is self-contained and immediately executed, requiring no external dependencies or configuration, making it easily reusable.
 
-    7. **Accessibility**:
+    2.7. **Accessibility**:
     - Includes smooth transition effects (opacity and visibility) for better user experience when the modal appears or disappears.
 
     
