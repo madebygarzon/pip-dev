@@ -86,6 +86,7 @@ The website incorporates several custom scripts to enrich the user experience. B
     - Access the **"Report Extended"** submenu under the WooCommerce menu in the admin panel.
 
 
+
 ## Project Structure
 
 This project follows Unbounce's standard development structure, with scripts and configurations managed directly within the platform. Key areas of customization are as follows:
