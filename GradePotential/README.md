@@ -17,7 +17,7 @@ The Grade Potential website was developed with Unbounce, leveraging its flexibil
 The website incorporates several custom scripts to enrich the user experience. Below is a general overview of the implemented scripts:
 
 1. **Dynamic Replacement**:
-   This script customizes web page content dynamically based on URL parameters and data fetched from an external API. It is designed to personalize the user experience by tailoring content to geographic regions or user-specific data. Below is a high-level overview of its functionality:
+   This script [Dynamic Replacement](https://github.com/madebygarzon/pip-dev/blob/main/GradePotential/DynamicReplacement.js) customizes web page content dynamically based on URL parameters and data fetched from an external API. It is designed to personalize the user experience by tailoring content to geographic regions or user-specific data. Below is a high-level overview of its functionality:
 
     ### Key Features
 
