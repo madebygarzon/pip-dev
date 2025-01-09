@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0&icon_names=travel_explore" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinamyc content</title>
+    <script src="scripts.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <section class="section_examples">
+        <div class="geoubi">
+            <span class="material-symbols-outlined">
+                travel_explore
+                </span>
+            <h2>Data from geoubication: </h2>
+            <h4>Phone: <span id="contact-number">Loading...</span></h3>
+            <p>Captura las coordenadas que el navegador suministra y las consulta a una API, donde retorna la ciudad. </p>
+        </div>
+        <div class="fromip">
+            <span class="material-symbols-outlined">
+                travel_explore
+                </span>
+            <h2>Data from ip location: </h2>
+            <h4>Phone: <span id="contact-number-ip">Loading...</span></p>
+            <p>Captura la ip del usuario y consulta su ubicación de registro en una API, retornando la ciudad.</p>
+        </div>
+        <div class="fromurl">
+            <span class="material-symbols-outlined">
+                travel_explore
+                </span>
+            <h2>Data from url information: </h2>
+            <h4>Phone: <span id="contact-number-url">Loading...</span></p>
+            <p>Lógica que obtiene datos que captura de la IP, y con base en esta info edita el contenido del DOM.</p>
+        </div>
+    </section>
+    <p style="text-align: center; color: #dfdfdf;">made by PiP Team Develop</p>
+    
+     
+
+
+    <script>
+        function getQueryParam(param) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(param);
+        }
+    
+        function displayContactNumber() {
+          const code = getQueryParam("code");
+          let contactNumber;
+    
+          switch (code) {
+            case "7879": // Bogotá
+              contactNumber = "+57 321 7979089 \nYou are in Bogotá 🏢";
+              break;
+            case "7890": // Manizales
+              contactNumber = "+57 320 7601766 \nYou are in Manizales 🪭";
+              break;
+            default:
+              contactNumber = "+57 310 1234567 \nDefault information 🤔"; 
+          }
+    
+          document.getElementById("contact-number-url").textContent = contactNumber;
+        }
+    
+        displayContactNumber();
+      </script>
+
+</body>
+</html>
