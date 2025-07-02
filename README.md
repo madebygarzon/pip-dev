@@ -31,3 +31,22 @@ To contribute to the repository:
 - Follow the repository's folder structure and naming conventions.
 - Always document your code and updates in the respective `README.md` and `CHANGELOG.md`.
 - Ensure your code is thoroughly tested before pushing changes.
+
+## Projects
+
+Below is a summary of the projects currently included in this repository:
+
+### GradePotential
+Website built on the Unbounce platform to provide personalized tutoring services. It includes custom JavaScript for dynamic content replacement and modal interactions.
+
+### LearnAcue
+WordPress site that integrates a custom **Report Extended** script to generate detailed WooCommerce order reports for administrators.
+
+### dinamycContent
+Sample page demonstrating geolocation-based dynamic contact numbers using vanilla HTML, CSS, and JavaScript.
+
+### export-wp-job-openings
+Standalone WordPress plugin that exports applicants from the WP Job Openings plugin without modifying the original codebase.
+
+### paymoAPI
+Reserved folder for future integrations with the Paymo API.
