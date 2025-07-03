@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Export WP Job Applicants
  * Description: Export applicants from WP Job Openings without modifying the original plugin.
- * Version: 1.1
+ * Version: 7.5
  * Author: Pipdevteam
  */
 
@@ -43,25 +43,61 @@ function custom_export_applicants_excel() {
     }
 
     $applications = AWSM_Job_Openings::get_all_applications( 'all' );
-    $rows         = array();
-    $rows[]       = array( 'Name', 'Phone', 'Email', 'Resume' );
+    $rows = array();
+    $rows[] = array( 'Applicant Export - ' . date('F j, Y') );
+    $rows[] = array( 'Job Title', 'Name', 'Phone', 'Email', 'Resume', 'Cover Letter', 'Job Status', 'Application date' );
 
     if ( ! empty( $applications ) ) {
         foreach ( $applications as $application ) {
-            $name      = get_post_meta( $application->ID, 'awsm_applicant_name', true );
-            $phone     = get_post_meta( $application->ID, 'awsm_applicant_phone', true );
-            $email     = get_post_meta( $application->ID, 'awsm_applicant_email', true );
-            $resume_id = get_post_meta( $application->ID, 'awsm_attachment_id', true );
-            $resume    = '';
+            $name       = get_post_meta( $application->ID, 'awsm_applicant_name', true );
+            $phone      = get_post_meta( $application->ID, 'awsm_applicant_phone', true );
+            $email      = get_post_meta( $application->ID, 'awsm_applicant_email', true );
+            $resume_id  = get_post_meta( $application->ID, 'awsm_attachment_id', true );
+            $resume     = $resume_id ? wp_get_attachment_url( $resume_id ) : '';
+
+            $resume = '';
 
             if ( $resume_id ) {
-                $resume = wp_get_attachment_url( $resume_id );
-                if ( get_option( 'awsm_hide_uploaded_files' ) === 'hide_files' && $resume ) {
-                    $resume = AWSM_Job_Openings::get_application_edit_link( $application->ID );
+                $hide_files = get_option( 'awsm_hide_uploaded_files' );
+
+                if ( $hide_files === 'hide_files' ) {
+                   
+                    $resume = 'File hidden by admin';
+                } else {
+                    
+                    $resume = wp_get_attachment_url( $resume_id );
                 }
             }
 
-            $rows[] = array( $name, $phone, $email, $resume );
+            $cover_letter = get_post_meta( $application->ID, 'awsm_applicant_letter', true );
+            $job_title    = get_post_meta( $application->ID, 'awsm_apply_for', true );
+
+            $job_id     = $application->post_parent;
+            $job_status = 'Unknown';
+
+            if ( $job_id ) {
+                $post_status = get_post_status( $job_id );
+                $job_status = ($post_status === 'publish') ? 'Active' : 'Inactive';
+
+
+                $meta_status = get_post_meta( $job_id, 'awsm_job_status', true );
+                if ( ! empty( $meta_status ) ) {
+                    $job_status = ucfirst( $meta_status );
+                }
+            }
+
+            $date_posted = get_the_date( 'Y-m-d', $application->ID );
+
+            $rows[] = array(
+            $job_title,
+            $name,
+            $phone,
+            $email,
+            $resume,
+            $cover_letter,
+            $job_status,
+            $date_posted
+            );
         }
     }
 
@@ -70,17 +106,29 @@ function custom_export_applicants_excel() {
     }
     flush();
 
-    header( 'Content-Type: application/vnd.ms-excel; charset=utf-8' );
-    header( 'Content-Disposition: attachment; filename=applicants.xls' );
+    header( 'Content-Type: text/csv; charset=utf-8' );
+    header( 'Content-Disposition: attachment; filename=applicants.csv' );
 
     foreach ( $rows as $row ) {
-        echo implode( "\t", array_map( 'custom_export_clean_field', $row ) ) . "\n";
+        echo implode(",", array_map(function($v) {
+            $v = custom_export_clean_field($v);
+            return '"' . str_replace('"', '""', $v) . '"';
+        }, $row)) . "\n";
     }
     exit;
 }
 
 function custom_export_clean_field( $value ) {
-    return str_replace( array( "\t", "\n", "\r" ), ' ', $value );
+    $value = strip_tags( $value );
+    $value = html_entity_decode( $value, ENT_QUOTES, 'UTF-8' );
+    
+    $value = str_replace([ "\u{2028}", "\u{2029}" ], ' ', $value);
+
+    $value = preg_replace( "/[\t\r\n]+/", " ", $value );
+
+    $value = preg_replace( "/\s+/", " ", $value );
+
+    return trim( $value );
 }
 
 add_action( 'admin_init', 'custom_export_applicants_download_hook' );
@@ -92,6 +140,22 @@ function custom_export_applicants_download_hook() {
         current_user_can( 'manage_awsm_jobs' ) &&
         check_admin_referer( 'custom_export_applicants_excel' )
     ) {
-        custom_export_applicants_excel(); // función ya definida antes
+        custom_export_applicants_excel();
     }
 }
+
+add_action('init', function () {
+    add_rewrite_rule('^export-applicants-download/?$', 'index.php?export_applicants=1', 'top');
+});
+
+add_filter('query_vars', function ($vars) {
+    $vars[] = 'export_applicants';
+    return $vars;
+});
+
+add_action('template_redirect', function () {
+    if (get_query_var('export_applicants') == 1) {
+        custom_export_applicants_excel();
+        exit;
+    }
+});
