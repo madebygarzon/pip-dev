@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Export WP Job Applicants
  * Description: Export applicants from WP Job Openings without modifying the original plugin.
- * Version: 7.5
+ * Version: 8.5
  * Author: Pipdevteam
  */
 
@@ -34,9 +34,9 @@ function custom_export_applicants_page() {
 }
 
 function custom_export_applicants_excel() {
-    if ( ! current_user_can( 'manage_awsm_jobs' ) ) {
-        wp_die( __( 'You do not have permission to export applicants.', 'wp-job-openings' ) );
-    }
+    // if ( ! current_user_can( 'manage_awsm_jobs' ) ) {
+    //     wp_die( __( 'You do not have permission to export applicants.', 'wp-job-openings' ) );
+    // }
 
     if ( ! class_exists( 'AWSM_Job_Openings' ) ) {
         wp_die( 'WP Job Openings plugin not active or loaded.' );
@@ -131,18 +131,6 @@ function custom_export_clean_field( $value ) {
     return trim( $value );
 }
 
-add_action( 'admin_init', 'custom_export_applicants_download_hook' );
-
-function custom_export_applicants_download_hook() {
-    if (
-        isset( $_GET['custom_export_applicants_download'] ) &&
-        $_GET['custom_export_applicants_download'] === 'excel' &&
-        current_user_can( 'manage_awsm_jobs' ) &&
-        check_admin_referer( 'custom_export_applicants_excel' )
-    ) {
-        custom_export_applicants_excel();
-    }
-}
 
 add_action('init', function () {
     add_rewrite_rule('^export-applicants-download/?$', 'index.php?export_applicants=1', 'top');
